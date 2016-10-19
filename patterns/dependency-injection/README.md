@@ -6,8 +6,10 @@
 ---
 
 Big part of the modules/components that we write have dependencies. A proper management of these dependencies is critical for the success of the project. There is a technique (some people consider it as a *pattern*) called [*dependency injection*](http://krasimirtsonev.com/blog/article/Dependency-injection-in-JavaScript) that helps solving the problem.
+我们编写的大部分组件都是有依赖性的。良好的依赖管理机制是一个项目成败至关重要的因素。依赖注入[*dependency injection*](http://krasimirtsonev.com/blog/article/Dependency-injection-in-JavaScript)这种方式（或者模式）可以帮助我们处理好这个问题。
 
 In React the need of dependency injector is easily visible. Let's consider the following application tree:
+在React中依赖注入的需求随处可见。让我们考虑下面的应用树：
 
 ```js
 // Title.jsx
@@ -41,8 +43,10 @@ class App extends React.Component {
 ```
 
 The string "React in patterns" should somehow reach the `Title` component. The direct way of doing this is to pass it from `App` to `Header` and then `Header` to pass it to `Title`. However, this may work for these three components but what happens if there are multiple properties and deeper nesting. Lots of components will have to mention properties that they are not interested in. It is clear that most React components receive their dependencies via props but the question is how these dependencies reach that point.
+字符串 “React in patterns” 应该以某种方式传到 `Title` 组件中。直白的实现方法就将它是从 `App` 到传 `Header` ，然后再从 `Header` 传到 `Title`。然而，这么做这三个组件应该没问题，但如果有多个属性和更深嵌套的情况又会怎样呢。许多组件将不得不提及它们并不关注的属性。明显的是大部的 React 组件是通过 props 接收他们依赖的值，问题在于这些依赖值又是怎么到达那些点的。
 
 We already saw how the [higher-order component](https://github.com/krasimir/react-in-patterns/tree/master/patterns/higher-order-components) may be used to inject data. Let's use the same technique to inject the `title` variable:
+
 
 ```js
 // inject.jsx
