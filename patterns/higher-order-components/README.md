@@ -81,3 +81,39 @@ var OriginalComponent  = (props) => <p>{ props.title }</p>;
 ### What's next
 
 Check out [dependency injection](https://github.com/krasimir/react-in-patterns/tree/master/patterns/dependency-injection) and [presentational and container ](https://github.com/krasimir/react-in-patterns/tree/master/patterns/presentational-and-container) sections. There are good example of higher-order components.
+
+备注：
+
+使用场景： 这个很牛逼，参考 [recompose](https://github.com/acdlite/recompose) ,被使用在非常多的地方，如基础组件的能用基本功能。 （最初的理解为可能适用于导航，显示不同title时可以用这个）
+
+另外附上上边 Dan 对指出的最佳实践代码：
+
+>  This is not a good example:
+  ```js
+    var OriginalComponent = () => <p>Hello world.</p>;
+    class App extends React.Component {
+      render() {
+        return React.createElement(enhanceComponent(OriginalComponent));
+      }
+    };
+  ```
+
+>  It is slow and blows away the DOM and state completely in all components below OriginalComponent because enhanceComponent(OriginalComponent) gives you a different type every time you render().
+
+>  Here’s how to fix:
+  ```js
+    var OriginalComponent = () => <p>Hello world.</p>;
+    var EnhancedComponent = enhanceComponent(OriginalComponent);
+    class App extends React.Component {
+      render() {
+        return React.createElement(EnhancedComponent);
+      }
+    };
+  ```
+
+>  The trick? We do this just once, so render() always returns the same type of EnhancedComponent. (原因就在这，在定义的时候就生成高阶组件可以减少渲染的次数，也就是说这个是优化性能的一点关注点)
+
+
+
+
+
