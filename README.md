@@ -6,6 +6,8 @@
 * Foundation
   * [Communication](./patterns/communication/)
   * [Event handlers](./patterns/event-handlers)
+  * [Children in JSX](./patterns/children-in-jsx)
+  * [Controlled and uncontrolled inputs](./patterns/controlled-uncontrolled)
   * [Composition](./patterns/composition/)
   * [Higher-order components](./patterns/higher-order-components/)
   * [Presentational and container components](./patterns/presentational-and-container)
@@ -16,6 +18,9 @@
 * Data flow
   * [One direction data flow](./patterns/one-direction-data-flow)
   * [Flux](./patterns/flux)
+
+* MISC
+  * [Integration of third-party libraries](./patterns/third-party)
 
 ---
 
@@ -35,3 +40,4 @@
 * [React Design principles](https://facebook.github.io/react/contributing/design-principles.html)
 * [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 * [React patterns at Planning Center Online](https://github.com/planningcenter/react-patterns)
+* [React patterns by Michael Chan](http://reactpatterns.com/)
