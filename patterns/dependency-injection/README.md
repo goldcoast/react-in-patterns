@@ -47,6 +47,7 @@ The string "React in patterns" should somehow reach the `Title` component. The d
 
 We already saw how the [higher-order component](https://github.com/krasimir/react-in-patterns/tree/master/patterns/higher-order-components) may be used to inject data. Let's use the same technique to inject the `title` variable:
 
+我们已经看过如何使用高阶组件来注入数据。让我们使用相同的技术来注入变量 `title`： 
 
 ```js
 // inject.jsx
@@ -82,12 +83,17 @@ export default function Header() {
 
 The `title` is hidden in a middle layer (higher-order component) where we pass it as a prop to the original `Title` component. That's all nice but it solves only half of the problem. Now we don't have to pass the `title` down the tree but how this data will reach the `enhance.jsx` helper.
 
+`title` 隐藏在中间层（高阶组件）中，我们将它做为一个属性传递给原始的 `Title` 组件。这很好，但这只解决了问题的一半。现在我们不必把 `title` 传到树结构的最底部而是怎样传到助手类 `enhance.jsx` 。
+
 ## Using React's context
 
 React has the concept of [*context*](https://facebook.github.io/react/docs/context.html). The *context* is something that every component may have access to. It's something like an [event bus](https://github.com/krasimir/EventBus) but for data. A single model which we can access from everywhere.
 
+React 有上下文的概念（[*context*](https://facebook.github.io/react/docs/context.html)）。上下文是在每个组件中都可以访问的东西。它是专为数据服务的类似于事件总线的东西，一个任何地方都可访问的单一对象。
+
 ```js
 // a place where we'll define the context
+// 定义
 var context = { title: 'React in patterns' };
 class App extends React.Component {
   getChildContext() {
@@ -100,6 +106,7 @@ App.childContextTypes = {
 };
 
 // a place where we need data
+// 使用
 class Inject extends React.Component {
   render() {
     var title = this.context.title;
@@ -112,6 +119,8 @@ Inject.contextTypes = {
 ```
 
 Notice that we have to specify the exact signature of the context object. With `childContextTypes` and `contextTypes`. If those are not specified then the `context` object will be empty. That may be a little bit frustrating because we may have lots of stuff to put there. That's why it is a good practice that our `context` is not just a plain object but it has an interface that allows us to store and retrieve data. For example:
+
+要注意的是必须在上下文对象中指定具体的签名属性。使用 `childContextTypes` 和 `contextTypes` 指定。如果它们没指定那么 `context` 对象将是一个空对象。这可能有点沮丧因为我们可能有很多东西放在那。这就是为什么最佳实践中 `context` 对象不仅只是个富对象而是一个允许我们存取数据的接口。
 
 ```js
 // dependencies.js
@@ -126,6 +135,8 @@ export default {
 }
 ```
 Then, if we go back to our example, the very top `App` component may look like that:
+
+然后，如果我们回到我们的例子，最顶层的 `App` 组件可能看起来象这样：
 
 ```js
 import dependencies from './dependencies';
@@ -387,3 +398,5 @@ Dependency injection is a tough problem. Especially in JavaScript. It's not real
 ### Other resources related to dependency injection
 
 * [Level-up your dependencies in React ](https://medium.com/@marziosuperina/level-up-your-dependencies-in-react-part-1-d67bb2711b51)
+
+
